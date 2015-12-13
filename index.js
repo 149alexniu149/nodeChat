@@ -18,8 +18,10 @@ app.get('/', function(req, res){
 
 app.post('/', function(req, res){
   username = req.body.username;
+  console.log(username.length);
   RID = req.body.RID;
-  if(typeof RID === 'undefined' || typeof username == 'undefined'){
+  console.log(RID.length);
+  if(RID.length === 0 || typeof username.length === 0){
     res.sendFile(__dirname + '/entry.html');  
   }else{
     res.sendFile(__dirname + '/index.html');
