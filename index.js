@@ -29,16 +29,23 @@ app.post('/', function(req, res){
 });
 
 io.on('connection', function(socket){
+  //add username to people list
   people[socket.id] = username;
+  //add room id to room list
   room[socket.id] = RID;
+  //print the room id
   console.log(room[socket.id]);
+  //join the connecting socket to its room
   socket.join(room[socket.id]);
+  //broadcast that the user joined to everyone in the room
   io.to(room[socket.id]).emit('chat message', username + ' connected');
   socket.on('chat message', function(msg){
+    //whenever you detect a message, broadcast it to the room @ socket ID
     io.to(room[socket.id]).emit('chat message', people[socket.id] + ": " + msg);
     //socket.broadcast.to(people[socket.id]).emit('chat message', people[socket.id] + ": " + msg);  
   });
   socket.on('disconnect', function(){
+    //if the user leaves, broadcast a message
     io.to(room[socket.id]).emit('chat message', people[socket.id] + ' disconnected.');
     socket.leave(room[socket.id]);
   });
