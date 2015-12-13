@@ -28,7 +28,9 @@
         return false;
       });
       socket.on('chat message', function(msg){
-        $('#messages').append($('<li>').text(msg));
+        var time = new Date();
+        var tstring = '<'+time.getHours()+':'+time.getMinutes()+':'+time.getSeconds()+'> ';
+        $('#messages').append($('<li>').text(tstring+msg));
       });
       /*socket.on('disconnect', function(){
         $('#messages').append($('<li>').text('A user left the chat...'));

@@ -30,8 +30,6 @@ app.post('/', function(req, res){
 });
 
 io.on('connection', function(socket){
-  var contime = new Date();
-
   //add username to people list
   people[socket.id] = username;
   //add room id to room list
@@ -41,17 +39,15 @@ io.on('connection', function(socket){
   //join the connecting socket to its room
   socket.join(room[socket.id]);
   //broadcast that the user joined to everyone in the room
-  io.to(room[socket.id]).emit('chat message', '<' + contime.getHours() + ':' + contime.getMinutes() + ':' + contime.getSeconds() + '> ' + username + ' connected');
+  io.to(room[socket.id]).emit('chat message', username + ' connected');
   socket.on('chat message', function(msg){
     //whenever you detect a message, broadcast it to the room @ socket ID
-    var msgtime = new Date();
-    io.to(room[socket.id]).emit('chat message', '<' + msgtime.getHours() + ':' + msgtime.getMinutes() + ':' + msgtime.getSeconds() + '> ' + people[socket.id] + ": " + msg);
+    io.to(room[socket.id]).emit('chat message', people[socket.id] + ": " + msg);
     //socket.broadcast.to(people[socket.id]).emit('chat message', people[socket.id] + ": " + msg);  
   });
   socket.on('disconnect', function(){
     //if the user leaves, broadcast a message
-    var discontime = new Date();
-    io.to(room[socket.id]).emit('chat message','<' + discontime.getHours() + ':' + discontime.getMinutes() + ':' + discontime.getSeconds() + '> ' + people[socket.id] + ' disconnected.');
+    io.to(room[socket.id]).emit('chat message', people[socket.id] + ' disconnected.');
     socket.leave(room[socket.id]);
   });
 });
