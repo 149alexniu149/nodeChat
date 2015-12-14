@@ -39,7 +39,7 @@ io.on('connection', function(socket){
   //join the connecting socket to its room
   socket.join(room[socket.id]);
   //broadcast that the user joined to everyone in the room
-  io.to(room[socket.id]).emit('chat message', username + ' connected');
+  io.to(room[socket.id]).emit('chat message', people[socket.id] + ' connected');
   socket.on('chat message', function(msg){
     //whenever you detect a message, broadcast it to the room @ socket ID
     io.to(room[socket.id]).emit('chat message', people[socket.id] + ": " + msg);
