@@ -29,11 +29,13 @@
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
     <script>
       var socket = io();
+      //emit chat message event on form submission
       $('form').submit(function(){
         socket.emit('chat message', $('#m').val());
         $('#m').val('');
         return false;
       });
+      //code to update messages and show to all connected users
       socket.on('chat message', function(msg){
         var time = new Date();
         var tstring = '<'+time.getHours()+':'+time.getMinutes()+':'+time.getSeconds()+'> ';
