@@ -37,8 +37,11 @@
       });
       //code to update messages and show to all connected users
       socket.on('chat message', function(msg){
-        var time = new Date();
-        var tstring = '<'+time.getHours()+':'+time.getMinutes()+':'+time.getSeconds()+'> ';
+        var time1 = new Date();
+        var hours1 = ('0'+time1.getHours()).slice(-2);
+        var minutes1 = ('0'+time1.getMinutes()).slice(-2);
+        var seconds1 = ('0'+time1.getSeconds()).slice(-2);
+        var tstring = '<'+hours1+':'+minutes1+':'+seconds1+'> ';
         $('#messages').append($('<li>').text(tstring+msg));
         $("#messages").scrollTop($("#messages").prop('scrollHeight'));
       });
