@@ -1,0 +1,23 @@
+Build: Sounds V1
+Sounds v1 may be placeholder
+
+Concept: Sounds for Chat, UI, and DEV
+
+Current:
+*added: sound_chat_clientconnectionproblem1
+*added: sound_chat_clientconnectionproblem2
+*added: sound_chat_userconn1
+*added: sound_chat_userdisconn2
+*added: sound_chat_usersendmessage1
+*added: sound_chat_errorhighpriority1
+*added: sound_ui_errormedpriority1
+*added: sound_ui_errormedpriority1
+*added: sound_ui_errorlowpriority1
+
+Previous:
+*None
+
+Next Build:
+*unsure?
+*More sounds when needed?
+*More UI?
